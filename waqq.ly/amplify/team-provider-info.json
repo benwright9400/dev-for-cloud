@@ -1,0 +1,35 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-waqqly-dev-161200-authRole",
+      "UnauthRoleArn": "arn:aws:iam::558099092121:role/amplify-waqqly-dev-161200-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::558099092121:role/amplify-waqqly-dev-161200-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-waqqly-dev-161200-deployment",
+      "UnauthRoleName": "amplify-waqqly-dev-161200-unauthRole",
+      "StackName": "amplify-waqqly-dev-161200",
+      "StackId": "arn:aws:cloudformation:eu-west-1:558099092121:stack/amplify-waqqly-dev-161200/5cddc790-677f-11ee-9743-0a460f3d42e3",
+      "AmplifyAppId": "d971vs07u7f6m"
+    },
+    "categories": {
+      "function": {
+        "PetHandler": {
+          "deploymentBucketName": "amplify-waqqly-dev-161200-deployment",
+          "s3Key": "amplify-builds/PetHandler-32694b7257464d45322b-build.zip"
+        }
+      },
+      "api": {
+        "pet": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d971vs07u7f6m",
+          "type": "manual"
+        }
+      },
+      "auth": {
+        "waqqly0a9567ff": {}
+      }
+    }
+  }
+}
