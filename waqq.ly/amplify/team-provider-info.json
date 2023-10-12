@@ -12,15 +12,6 @@
       "AmplifyAppId": "d971vs07u7f6m"
     },
     "categories": {
-      "function": {
-        "PetHandler": {
-          "deploymentBucketName": "amplify-waqqly-dev-161200-deployment",
-          "s3Key": "amplify-builds/PetHandler-32694b7257464d45322b-build.zip"
-        }
-      },
-      "api": {
-        "pet": {}
-      },
       "hosting": {
         "amplifyhosting": {
           "appId": "d971vs07u7f6m",
@@ -29,6 +20,15 @@
       },
       "auth": {
         "waqqly0a9567ff": {}
+      },
+      "function": {
+        "PetsHandler": {
+          "deploymentBucketName": "amplify-waqqly-dev-161200-deployment",
+          "s3Key": "amplify-builds/PetsHandler-366259565952654c5450-build.zip"
+        }
+      },
+      "api": {
+        "Pet": {}
       }
     }
   }

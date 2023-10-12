@@ -1,9 +1,9 @@
 {
   "version": 1,
   "paths": {
-    "/resources/pet/{petId}": {
-      "name": "/resources/pet/{petId}",
-      "lambdaFunction": "PetHandler",
+    "/resources/pets": {
+      "name": "/resources/pets",
+      "lambdaFunction": "PetsHandler",
       "permissions": {
         "setting": "open"
       }

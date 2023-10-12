@@ -47,12 +47,12 @@
         "FunctionName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "PetHandler",
+            "PetsHandler",
             {
               "Fn::Join": [
                 "",
                 [
-                  "PetHandler",
+                  "PetsHandler",
                   "-",
                   {
                     "Ref": "env"
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "waqqlyLambdaRole0f1f3530",
+            "waqqlyLambdaRole8766f3f8",
             {
               "Fn::Join": [
                 "",
                 [
-                  "waqqlyLambdaRole0f1f3530",
+                  "waqqlyLambdaRole8766f3f8",
                   "-",
                   {
                     "Ref": "env"

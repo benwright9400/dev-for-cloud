@@ -12,6 +12,10 @@ See the License for the specific language governing permissions and limitations 
 const express = require('express')
 const bodyParser = require('body-parser')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
+const MONGODB_URI = "mongodb+srv://server:Lolipop32@medireq0.m7es4pc.mongodb.net/?retryWrites=true&w=majority";
+const mongoose = require('mongoose');
+mongoose.connect(MONGODB_URI);
+
 
 // declare a new express app
 const app = express()
@@ -25,12 +29,23 @@ app.use(function(req, res, next) {
   next()
 });
 
+
+const Pet = mongoose.model('Pet', {name: String, size: String, postcode: String, email: String, tel: String, image: String});
+const Walker = mongoose.model('Walker', {name: String, sizes: Array, postcode: String, email: String, tel: String, spaces: Number, image: String});
+
+
 /**********************
  * Example get method *
  **********************/
 
 app.get('/resources/pet/:petId', function(req, res) {
   // Add your code here
+  Satisfaction.find().exec().then((val) => {
+    res.json({success: val, url: req.url});
+  }).catch((val) => {
+    res.json({success: [], url: req.url});
+  });
+
   res.json({success: 'get call succeed!', url: req.url});
 });
 

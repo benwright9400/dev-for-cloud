@@ -5,6 +5,11 @@ import '@aws-amplify/ui-react/styles.css';
 
 import awsExports from './aws-exports';
 import { useState } from 'react';
+import PetFilterSection from './components/filtersSections/PetFilterSection';
+import WalkerFilterSection from './components/filtersSections/WalkerFilterSection';
+import AccountPage from './components/page/AccountPage';
+import PetsPage from './components/page/PetsPage';
+import WalkerPage from './components/page/WalkerPage';
 Amplify.configure(awsExports);
 // { signOut, user }
 function App() {
@@ -30,16 +35,22 @@ function App() {
       </div>
       <div className='px-12 md:px-20 mt-4'>
         {
-          page
+          page === PETS && <PetsPage />
+        }
+        {
+          page === WALKERS && <WalkerPage />
+        }
+        {
+          page === ACCOUNT && <AccountPage />
         }
       </div>
     </div>
   );
 }
 
-// export default withAuthenticator(App);
+export default withAuthenticator(App);
 
-export default App;
+// export default App;
 
 // import logo from './logo.svg';
 // import './App.css';
