@@ -18,9 +18,9 @@ mongoose.connect(MONGODB_URI);
 
 
 // declare a new express app
-const app = express()
-app.use(bodyParser.json())
-app.use(awsServerlessExpressMiddleware.eventContext())
+const app = express();
+app.use(bodyParser.json());
+app.use(awsServerlessExpressMiddleware.eventContext());
 
 // Enable CORS for all methods
 app.use(function (req, res, next) {
@@ -66,33 +66,26 @@ app.get('/resources/pets/*', function (req, res) {
 ****************************/
 
 app.post('/resources/pets', function (req, res) {
+      
+    if(req.body._id && req.body._id.length > 0) { 
+          
+      Pet.findByIdAndUpdate(req.body._id, req.body).then((result) => {
+        res.json({ success: result, url: req.url, body: req.body })
+      }).catch((err) => {
+        res.json({ failure: err, url: req.url, body: req.body })
+      });
+      
+    } else {
 
-  let pet = new Pet();
-  pet.user = req.body.user && "";
-  pet.name = req.body.name && "";
-  pet.size = req.body.name && "";
-  pet.postcode = req.body.postcode && "";
-  pet.email = req.body.email && "";
-  pet.tel = req.body.tel && "";
-  pet.image = req.body.image && "./logo.png";
+      let pet = new Pet({name: req.body.name, user: req.body.user, size: req.body.size, postcode: req.body.postcode, email: req.body.email, tel: req.body.tel, image: req.body.image});
+      
+      pet.save().then((result) => {
+        res.json({ success: result, url: req.url, body: req.body })
+      }).catch((err) => {
+        res.json({ failure: err, url: req.url, body: req.body })
+      });
 
-  if (pet._id) {
-
-    Pet.findOneAndUpdate(pet._id, pet).then((result) => {
-      res.json({ success: result, url: req.url, body: req.body })
-    }).catch((err) => {
-      res.json({ failure: err, url: req.url, body: req.body })
-    });
-
-  } else {
-
-    pet.save().then((result) => {
-      res.json({ success: result, url: req.url, body: req.body })
-    }).catch((err) => {
-      res.json({ failure: err, url: req.url, body: req.body })
-    });
-
-  }
+    }
 
 });
 
@@ -107,32 +100,26 @@ app.post('/resources/pets/*', function (req, res) {
 
 app.put('/resources/pets', function (req, res) {
   
-  let pet = new Pet();
-  pet.user = req.body.user && "";
-  pet.name = req.body.name && "";
-  pet.size = req.body.name && "";
-  pet.postcode = req.body.postcode && "";
-  pet.email = req.body.email && "";
-  pet.tel = req.body.tel && "";
-  pet.image = req.body.image && "./logo.png";
-
-  if (pet._id) {
-
-    Pet.findOneAndUpdate(pet._id, pet).then((result) => {
-      res.json({ success: result, url: req.url, body: req.body })
-    }).catch((err) => {
-      res.json({ failure: err, url: req.url, body: req.body })
-    });
-
-  } else {
-
-    pet.save().then((result) => {
-      res.json({ success: result, url: req.url, body: req.body })
-    }).catch((err) => {
-      res.json({ failure: err, url: req.url, body: req.body })
-    });
+    let pet;
     
-  }
+    if(req.body._id) { 
+           
+      Pet.findByIdAndUpdate(req.body._id, req.body).then((result) => {
+        res.json({ success: result, url: req.url, body: req.body })
+      }).catch((err) => {
+        res.json({ failure: err, url: req.url, body: req.body })
+      });
+      
+    } else {
+      pet = new Pet({name: req.body.name, user: req.body.user, size: req.body.size, postcode: req.body.postcode, email: req.body.email, tel: req.body.tel, image: req.body.image});
+      
+      pet.save().then((result) => {
+        res.json({ success: result, url: req.url, body: req.body })
+      }).catch((err) => {
+        res.json({ failure: err, url: req.url, body: req.body })
+      });
+
+    }
   
 });
 
