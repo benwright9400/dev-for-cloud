@@ -45,10 +45,10 @@ const Walker = mongoose.model('Walker', { user: String, name: String, sizes: Arr
 app.get('/resources/pets', function (req, res) {
   // Add your code here
 
-  let filters = req.body.filters && {};
+  let size = req.query.filters.size;
+  let postCode = req.query.filters.postCode;
 
-
-  Pet.find(filters).then((results) => {
+  Pet.find({$and: [{size: { $or: ["a", size]}}, {postcode: {$regex: '^' + postCode}}]}).then((results) => {
     res.json({ success: results, url: req.url });
   }).catch((err) => {
     res.json({ failure: err, url: req.url });

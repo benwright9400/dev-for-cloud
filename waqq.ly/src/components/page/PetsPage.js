@@ -5,12 +5,15 @@ import PetAPI from "../../api/PetApi";
 
 function PetsPage() {
     const [count, setCount] = useState(0);
+    const [pets, setPets] = useState([]);
+    const [filters, setFilters] = useState([{}]);
 
     useEffect(() => {
         if(count === 0) {
 
-            PetAPI.searchPets().then((res) => {
+            PetAPI.searchPets(filters[0]).then((res) => {
                 console.log(res);
+                setPets([]);
             });
 
             setCount(count + 1);
@@ -18,8 +21,12 @@ function PetsPage() {
     });
 
     return (<div>
-        <PetFilterSection setRequest={() => console.log("called")} />
-        <DogCard />
+        <PetFilterSection setRequest={(obj) => {setFilters([obj]); setCount(0);}} />
+        {
+            pets.map((pet) => {
+                return <DogCard pet={pet} />;
+            })
+        }
     </div>);
 }
 

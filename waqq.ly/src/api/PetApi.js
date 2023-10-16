@@ -9,7 +9,9 @@ class PetAPI {
         
         try {
             
-            let res = await API.post(apiName, path, obj);
+            let res = await API.post(apiName, path, {body: obj});
+        
+            console.log(res);
 
             if(res.failure) {
                 console.log(res.failure);
@@ -31,8 +33,12 @@ class PetAPI {
     static update = async function(obj) {
 
         try {
+
+            console.log(obj);
             
-            let res = await API.post(apiName, path, obj);
+            let res = await API.post(apiName, path, {body: obj});
+
+            console.log(res);
 
             if(res.failure) {
                 console.log(res.failure);
@@ -55,7 +61,7 @@ class PetAPI {
         
         try {
             
-            let res = await API.del(apiName, path, obj);
+            let res = await API.del(apiName, path, { body: obj});
 
             if(res.failure) {
                 console.log(res.failure);
@@ -78,7 +84,9 @@ class PetAPI {
 
         try {
             
-            let res = await API.get(apiName, path);
+            let res = await API.get(apiName, path, { queryStringParameters: filters});
+
+            console.log(res);
 
             if(res.failure) {
                 console.log(res.failure);
