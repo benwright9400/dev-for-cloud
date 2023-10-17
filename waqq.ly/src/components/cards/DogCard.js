@@ -4,6 +4,8 @@ function DogCard(props) {
 
     if(!props.pet.image) {
         image =  "./logo.png";
+    } else {
+        image = props.pet.image;
     }
 
     return (<div className="mx-auto bg-slate-200 shadow-md rounded my-2 max-w-xl pl-2 flex flex-row">

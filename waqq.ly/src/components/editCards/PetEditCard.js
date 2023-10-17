@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PetAPI from "../../api/PetApi";
-import { Auth } from "aws-amplify";
+import { Auth, Storage } from "aws-amplify";
 
 function PetEditCard(props) {
     const [name, setName] = useState(props.pet.name);
@@ -11,9 +11,22 @@ function PetEditCard(props) {
     const [imageUrl, setImageUrl] = useState(props.pet.image);
 
 
-    function uploadToS3() {
+    function onFileChange(e) {
+        const file = e.target.files[0];
 
-        update();
+        try {
+            Storage.put(file.name, file).then((res) => {
+                console.log(res);
+                Storage.get(res.key).then((img) => {
+                    console.log(img);
+                    setImageUrl(img);
+                    update();
+                });
+            });
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
     function update() {
@@ -52,7 +65,7 @@ function PetEditCard(props) {
     return (<div className="mx-auto bg-slate-200 shadow-md rounded my-2 max-w-xl pl-2 flex flex-row p-2">
         <div className="w-1/3">
             <img className="align-center" src={imageUrl} />
-            <input type="file" className="w-full" onChange={uploadToS3}></input>
+            <input type="file" className="w-full" onChange={onFileChange}></input>
         </div>
         <div className="pl-4 space-y-1 mt-2">
             <input type="text" value={name} onChange={(e) => {setName(e.target.value); }} placeholder="name" className="text-vert text-md ml-2 rounded"></input>

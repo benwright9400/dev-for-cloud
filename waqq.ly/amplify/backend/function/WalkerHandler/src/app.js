@@ -86,7 +86,7 @@ app.post('/resources/walkers', function(req, res) {
     
   } else {
 
-    let walker = new Walker({ user: req.body.user, name: req.body.name, sizes: req.body.sizes, postcode: req.body.postCode, email: req.body.email, tel: req.body.tel, spaces: req.body.spaces, image: req.body.images });
+    let walker = new Walker({ user: req.body.user, name: req.body.name, sizes: req.body.sizes, postcode: req.body.postCode, email: req.body.email, tel: req.body.tel, spaces: req.body.spaces, image: req.body.image });
     
     walker.save().then((result) => {
       res.json({ success: result, url: req.url, body: req.body })
