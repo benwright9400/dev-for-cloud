@@ -28,7 +28,7 @@ app.use(function(req, res, next) {
   next()
 });
 
-const Walker = mongoose.model('Walker', { user: String, name: String, sizes: Array, postcode: String, email: String, tel: String, spaces: Number, image: String });
+const Walker = mongoose.model('Walker', { user: String, name: String, size: String, postcode: String, email: String, tel: String, spaces: Number, image: String });
 
 
 
@@ -45,6 +45,10 @@ app.get('/resources/walkers', function(req, res) {
 
   if(req.query.hasOwnProperty('postCode')) {
     query.$and.push({postcode: {$regex: '^' + req.query.postCode}});
+  }
+
+  if(req.query.hasOwnProperty('hasVacancies')) {
+    query.$and.push({spaces: {$gt: 0}});
   }
 
   if(req.query.hasOwnProperty('user')) {
@@ -134,16 +138,17 @@ app.put('/resources/walkers/*', function(req, res) {
 ****************************/
 
 app.delete('/resources/walkers', function(req, res) {
-  let id = req.body.id && "";
 
-  if (id === "") {
+  if (!req.body.hasOwnProperty("id")) {
     res.json({ failure: 'no walker ID entered', url: req.url });
+    return;
   }
 
 
-  Walker.deleteOne(id).then((result) => {
+  Walker.findByIdAndDelete(req.body.id).then((result) => {
     res.json({ success: result, url: req.url });
   }).catch((err) => {
+    console.log(err);
     res.json({ failure: err, url: req.url });
   });
 
