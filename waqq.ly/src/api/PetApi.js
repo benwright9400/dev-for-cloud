@@ -1,7 +1,7 @@
 import { API } from "aws-amplify";
 
 const apiName = "Pet"
-const path = '/resources/pets/'; 
+const path = '/resources/pets'; 
 
 class PetAPI {
 
@@ -84,7 +84,7 @@ class PetAPI {
 
         try {
             
-            let res = await API.get(apiName, path, { queryStringParameters: filters});
+            let res = await API.get(apiName, path, { queryStringParameters: {...filters}});
 
             console.log(res);
 

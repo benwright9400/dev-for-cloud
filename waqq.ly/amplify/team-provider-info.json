@@ -24,7 +24,7 @@
       "function": {
         "PetsHandler": {
           "deploymentBucketName": "amplify-waqqly-dev-161200-deployment",
-          "s3Key": "amplify-builds/PetsHandler-734c486c30686e593242-build.zip"
+          "s3Key": "amplify-builds/PetsHandler-62723344487650777635-build.zip"
         }
       },
       "api": {

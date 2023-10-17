@@ -18,7 +18,7 @@ function PetSubPage() {
         Auth.currentAuthenticatedUser().then((user) => {
             console.log(user.pool.clientId);
 
-            PetAPI.searchPets().then((pets) => {
+            PetAPI.searchPets({user: user.pool.clientId}).then((pets) => {
                 console.log(pets);
                 setPets(pets);
             });
@@ -26,7 +26,14 @@ function PetSubPage() {
     }
 
     function addPet() {
-        setPets([...pets, {}]);
+        setPets([...pets, {
+            name: "",
+            size: "a",
+            postcode: "",
+            email: "",
+            tel: "",
+            image: "./logo.png"    
+        }]);
     }
 
     return (<div>

@@ -14,7 +14,7 @@ const bodyParser = require('body-parser')
 const awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 const MONGODB_URI = "mongodb+srv://server:Lolipop32@medireq0.m7es4pc.mongodb.net/?retryWrites=true&w=majority";
 const mongoose = require('mongoose');
-mongoose.connect(MONGODB_URI);
+mongoose.connect(MONGODB_URI, {socketTimeoutMS: 30000, keepAlive: true});
 
 
 // declare a new express app
@@ -45,12 +45,26 @@ const Walker = mongoose.model('Walker', { user: String, name: String, sizes: Arr
 app.get('/resources/pets', function (req, res) {
   // Add your code here
 
-  let size = req.query.filters.size;
-  let postCode = req.query.filters.postCode;
+  let query = {$and: []};
 
-  Pet.find({$and: [{size: { $or: ["a", size]}}, {postcode: {$regex: '^' + postCode}}]}).then((results) => {
+  if(req.query.hasOwnProperty('size') && req.query.size != "a") {
+    query.$and.push({$or: [{size: "a"}, {size: req.query.size}]});
+  } 
+
+  if(req.query.hasOwnProperty('postCode')) {
+    query.$and.push({postcode: {$regex: '^' + req.query.postCode}});
+  }
+
+  if(req.query.hasOwnProperty('user')) {
+    query.$and = [{user: req.query.user}];
+  }
+
+  console.log(query);
+
+  Pet.find(query).then((results) => {
     res.json({ success: results, url: req.url });
   }).catch((err) => {
+    console.log(err);
     res.json({ failure: err, url: req.url });
   });
 

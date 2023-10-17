@@ -6,14 +6,16 @@ import PetAPI from "../../api/PetApi";
 function PetsPage() {
     const [count, setCount] = useState(0);
     const [pets, setPets] = useState([]);
-    const [filters, setFilters] = useState([{}]);
+    const [filters, setFilters] = useState([{size: "a", postCode: ""}]);
 
     useEffect(() => {
         if(count === 0) {
 
             PetAPI.searchPets(filters[0]).then((res) => {
                 console.log(res);
-                setPets([]);
+                
+                setPets(res);
+
             });
 
             setCount(count + 1);
@@ -24,7 +26,7 @@ function PetsPage() {
         <PetFilterSection setRequest={(obj) => {setFilters([obj]); setCount(0);}} />
         {
             pets.map((pet) => {
-                return <DogCard pet={pet} />;
+                return <DogCard key={pet._id} pet={pet} />;
             })
         }
     </div>);
