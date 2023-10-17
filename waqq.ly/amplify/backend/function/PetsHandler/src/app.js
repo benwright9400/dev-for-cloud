@@ -148,14 +148,14 @@ app.put('/resources/pets/*', function (req, res) {
 
 app.delete('/resources/pets', function (req, res) {
 
-  let id = req.body.id && "";
-
-  if (id === "") {
+  if (!req.body.hasOwnProperty('id')) {
     res.json({ failure: 'no pet ID entered', url: req.url });
   }
 
+  console.log(req.body);
 
-  Pet.deleteOne(id).then((result) => {
+
+  Pet.findByIdAndDelete(req.body.id).then((result) => {
     res.json({ success: result, url: req.url });
   }).catch((err) => {
     res.json({ failure: err, url: req.url });

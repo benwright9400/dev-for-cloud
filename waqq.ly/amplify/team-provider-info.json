@@ -24,11 +24,16 @@
       "function": {
         "PetsHandler": {
           "deploymentBucketName": "amplify-waqqly-dev-161200-deployment",
-          "s3Key": "amplify-builds/PetsHandler-62723344487650777635-build.zip"
+          "s3Key": "amplify-builds/PetsHandler-52784478454c6f574456-build.zip"
+        },
+        "WalkerHandler": {
+          "deploymentBucketName": "amplify-waqqly-dev-161200-deployment",
+          "s3Key": "amplify-builds/WalkerHandler-596856714c613056334c-build.zip"
         }
       },
       "api": {
-        "Pet": {}
+        "Pet": {},
+        "walkers": {}
       }
     }
   }

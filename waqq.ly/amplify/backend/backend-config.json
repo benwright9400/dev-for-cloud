@@ -13,6 +13,20 @@
       ],
       "providerPlugin": "awscloudformation",
       "service": "API Gateway"
+    },
+    "walkers": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "WalkerHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
     }
   },
   "auth": {
@@ -48,6 +62,11 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "WalkerHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "hosting": {
@@ -71,6 +90,22 @@
         {
           "category": "function",
           "resourceName": "PetsHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_WalkerHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "WalkerHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_WalkerHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "WalkerHandler"
         }
       ]
     },
