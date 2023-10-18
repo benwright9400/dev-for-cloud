@@ -30,7 +30,7 @@ function WalkerEditCard(props) {
         console.log(updatedPet);
 
         Auth.currentAuthenticatedUser().then((user) => {
-            updatedPet.user = user.pool.clientId;
+            updatedPet.user = user.username;
 
             WalkerAPI.update(updatedPet).then((pet) => {
                 props.refresh();
@@ -50,7 +50,7 @@ function WalkerEditCard(props) {
         const file = e.target.files[0];
 
         try {
-            Storage.put(file.name, file).then((res) => {
+            Storage.put(file.name, file, {level: 'public'}).then((res) => {
                 console.log(res);
                 Storage.get(res.key).then((img) => {
                     console.log(img);

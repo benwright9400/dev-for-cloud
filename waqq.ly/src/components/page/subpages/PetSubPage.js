@@ -16,9 +16,9 @@ function PetSubPage() {
 
     function getPets() {
         Auth.currentAuthenticatedUser().then((user) => {
-            console.log(user.pool.clientId);
+            console.log(user.username);
 
-            PetAPI.searchPets({user: user.pool.clientId}).then((pets) => {
+            PetAPI.searchPets({user: user.username}).then((pets) => {
                 console.log(pets);
                 setPets(pets);
             });

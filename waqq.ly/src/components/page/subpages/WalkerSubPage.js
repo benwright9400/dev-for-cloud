@@ -16,9 +16,9 @@ function WalkerSubPage() {
 
     function getWalkers() {
         Auth.currentAuthenticatedUser().then((user) => {
-            console.log(user.pool.clientId);
+            console.log(user);
 
-            WalkerAPI.searchWalkers({user: user.pool.clientId}).then((walkers) => {
+            WalkerAPI.searchWalkers({user: user.username}).then((walkers) => {
                 console.log(walkers);
                 setWalkers(walkers);
             });

@@ -15,7 +15,7 @@ function PetEditCard(props) {
         const file = e.target.files[0];
 
         try {
-            Storage.put(file.name, file).then((res) => {
+            Storage.put(file.name, file, {level: 'public'}).then((res) => {
                 console.log(res);
                 Storage.get(res.key).then((img) => {
                     console.log(img);

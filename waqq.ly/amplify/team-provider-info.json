@@ -28,7 +28,7 @@
         },
         "WalkerHandler": {
           "deploymentBucketName": "amplify-waqqly-dev-161200-deployment",
-          "s3Key": "amplify-builds/WalkerHandler-42414b53386f6a5a4259-build.zip"
+          "s3Key": "amplify-builds/WalkerHandler-6258773554414a545054-build.zip"
         }
       },
       "api": {
