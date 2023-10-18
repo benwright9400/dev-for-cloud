@@ -30,16 +30,23 @@ function AccountSubPage() {
         });
     }
 
-    return (<div className="space-y-2 text-center mt-12 mx-auto">
+    function signOutUser() {
+        Auth.signOut();
+    }
+
+    return (<div className="space-y-2 text-center mt-12 mx-auto w-fit">
             <button onClick={deleteAccount} className="rounded bg-red-700 hover:bg-red-600 hover:shadow-md text-semibold text-white p-1 px-4">Delete Account</button>
             <br></br>
+            <hr></hr>
             <p>Password:</p>
-            <br></br>
             <input className="border-2" placeholder="old password" type="password" value={oldPassword} onChange={(e) => setOldPassword(e.target.value)}  />
             <br></br>
             <input className="border-2" placeholder="new password" type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}  />
             <br></br>
             <button onClick={changePassword} className="rounded hover:bg-vert hover:shadow-md text-semibold text-vert hover:text-white p-1 px-4">Change Password</button>
+            <br></br>
+            <hr></hr>
+            <button onClick={signOutUser} className="rounded bg-vert hover:shadow-md text-semibold text-white hover:text-white p-1 px-4">Sign out</button>
        </div>);
 }
 
